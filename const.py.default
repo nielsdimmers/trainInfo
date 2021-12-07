@@ -1,0 +1,27 @@
+# Change this file to name "const.py" and insert the NS Portal API key, telegram bot key and chat ID below.
+
+
+DISRUPTIONS_URL = 'https://gateway.apiportal.ns.nl/reisinformatie-api/api/v3/disruptions/station/'
+API_KEY = '<NS API KEY HERE>'
+
+STATION_OLDMESSAGES_FILE = 'handledAlerts.txt'
+
+# Translation table to relationships
+SCHEDULE_RELATIONSHIP = {
+0 : 'SCHEDULED',
+1 : 'SKIPPED',
+2 : 'NO_DATA',
+3 : 'UNSCHEDULED'
+}
+
+TELEGRAM_API_TOKEN = "<TELEGRAM API TOKEN HERE>"
+
+TELEGRAM_CHAT_ID = "<TELEGRAM MESSAGE ID HERE>"
+
+TELEGRAM_URL = "https://api.telegram.org/bot" + TELEGRAM_API_TOKEN + "/sendMessage" + "?chat_id=" + TELEGRAM_CHAT_ID + "&text="
+
+DATABASE_FILE_NAME = 'trainUpdates.pb'
+
+DATABASE_FILE_URL = 'http://gtfs.ovapi.nl/nl/trainUpdates.pb'
+
+RETENTION_TIME_SECS = 900 # Number of seconds to keep the file, if it's older, refresh it.
