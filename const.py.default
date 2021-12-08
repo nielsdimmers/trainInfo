@@ -2,7 +2,7 @@
 
 
 DISRUPTIONS_URL = 'https://gateway.apiportal.ns.nl/reisinformatie-api/api/v3/disruptions/station/'
-API_KEY = '<NS API KEY HERE>'
+API_KEY = ''
 
 STATION_OLDMESSAGES_FILE = 'handledAlerts.txt'
 
@@ -14,9 +14,9 @@ SCHEDULE_RELATIONSHIP = {
 3 : 'UNSCHEDULED'
 }
 
-TELEGRAM_API_TOKEN = "<TELEGRAM API TOKEN HERE>"
+TELEGRAM_API_TOKEN = ""
 
-TELEGRAM_CHAT_ID = "<TELEGRAM MESSAGE ID HERE>"
+TELEGRAM_CHAT_ID = ""
 
 TELEGRAM_URL = "https://api.telegram.org/bot" + TELEGRAM_API_TOKEN + "/sendMessage" + "?chat_id=" + TELEGRAM_CHAT_ID + "&text="
 
@@ -25,3 +25,5 @@ DATABASE_FILE_NAME = 'trainUpdates.pb'
 DATABASE_FILE_URL = 'http://gtfs.ovapi.nl/nl/trainUpdates.pb'
 
 RETENTION_TIME_SECS = 900 # Number of seconds to keep the file, if it's older, refresh it.
+
+DELAY_NOTIFICATION_THRESHOLD = 120 # amount of delay needed before it counts

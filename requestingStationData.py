@@ -62,7 +62,7 @@ for entity in feed.entity:
 	if entity.HasField('trip_update') and entity.id not in oldMessages:
 		# A stop is a station receiving a notification. I'm looking for the ones I'm interested in
 		for stopTime in entity.trip_update.stop_time_update:
-			if str(stopTime.stop_id) in stationIDs and stopTime.departure.delay > 0: # you can remove the delay stuff here if you'd like.   
+			if str(stopTime.stop_id) in stationIDs and stopTime.departure.delay > const.DELAY_NOTIFICATION_THRESHOLD: # you can remove the delay stuff here if you'd like.   
 				# Find the matching route so I can actually call it by it's name
 				# Since it's a CSV, I guess this is the most efficient.
 				i = 0

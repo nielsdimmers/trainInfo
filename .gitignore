@@ -129,6 +129,7 @@ dmypy.json
 .pyre/
 
 # Things I added myself
-./handledAlerts.txt
-./data
-./trainUpdates.pb
+handledAlerts.txt
+data
+trainUpdates.pb
+const.py
