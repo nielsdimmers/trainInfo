@@ -6,6 +6,7 @@ import os
 import logging
 import const
 import utils
+import messagesSent
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -19,9 +20,6 @@ with open('data/routes.txt', newline='') as csvfile:
     routes = list(csv.reader(csvfile))  
 # CSV stop Data: 
 # route_id,agency_id,route_short_name,route_long_name,route_desc,route_type,route_color,route_text_color,route_url
-
-# 1b: laad al gemelde meldingen in, zodat ik ze kan overslaan
-oldMessages = utils.getOldMessages(const.STATION_OLDMESSAGES_FILE)
 
 # 2: Lees stops in
 with open('data/stops.txt', newline='') as csvfile:
@@ -59,7 +57,7 @@ result = ""
 
 # This data is structured this way...
 for entity in feed.entity:
-	if entity.HasField('trip_update') and entity.id not in oldMessages:
+	if entity.HasField('trip_update') and (not messagesSent.messageExists(str(entity.id))):
 		# A stop is a station receiving a notification. I'm looking for the ones I'm interested in
 		for stopTime in entity.trip_update.stop_time_update:
 			if str(stopTime.stop_id) in stationIDs and stopTime.departure.delay > const.DELAY_NOTIFICATION_THRESHOLD: # you can remove the delay stuff here if you'd like.   
@@ -75,7 +73,7 @@ for entity in feed.entity:
 				
 				result += const.SCHEDULE_RELATIONSHIP[entity.trip_update.trip.schedule_relationship]+ "\n"
 				result += "Vertrek: "+time.strftime('%H:%M:%S', time.localtime(stopTime.departure.time)) + " (delay: "+str(stopTime.departure.delay)+" seconds or "+str(round(stopTime.departure.delay/60))+" minutes) \n"
-				utils.saveOldMessage(const.STATION_OLDMESSAGES_FILE, entity.id) # write the ID to the file, so we know we've handled this message
+		messagesSent.addNewMessage(str(entity.id)) # write the ID to the database, so we know we've handled this message
 
 if result:
 	logger.info("Send message response " + utils.sendTelegramMessage(result))
