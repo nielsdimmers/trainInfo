@@ -3,6 +3,9 @@
 # Change log
 (most recent on top)
 
+## 2022-12-13 (1)
++ minor bugfixes
+
 ## 2022-12-13
 + Added journey functionality, cleaned up other code
 

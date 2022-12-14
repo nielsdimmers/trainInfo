@@ -95,11 +95,11 @@ class Stations:
 			plannedDeparture = self.getDateTimeFromJSON(departure['plannedDateTime'])
 			actualDeparture = self.getDateTimeFromJSON(departure['actualDateTime'])
 			
-					
 			table_row.append(self.getTimeFromJSON(departure['actualDateTime']))
-			if actualDeparture != plannedDeparture:
-				verschilTijd = actualDeparture - plannedDeparture
-				table_row.append('%s' % verschilTijd)
+			delay = actualDeparture - plannedDeparture
+			
+			if delay.total_seconds() > 0:
+				table_row.append('%s' % delay)
 			else:
 				table_row.append('')
 			
